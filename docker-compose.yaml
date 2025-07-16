@@ -4,10 +4,10 @@ networks:
     driver: bridge
 services:
   mongodb:
-    image: joindevops/mongodb:v1
+    image: msivakmrreddy/mongodb:v1
     container_name: mongodb
   catalogue:
-    image: joindevops/catalouge:v1
+    image: msivakmrreddy/catalouge:v1
     container_name: catalogue
     depends_on:
     - mongodb
@@ -15,12 +15,12 @@ services:
     image: redis:7.0
     container_name: redis
   user:
-    image: joindevops/user:v1
+    image: msivakmrreddy/user:v1
     container_name: user
     depends_on:
     - redis
   cart:
-    image: joindevops/cart:v1
+    image: msivakmrreddy/cart:v1
     container_name: cart
     depends_on:
     - redis
@@ -28,25 +28,25 @@ services:
     image: rabbitmq:3.0
     container_name: rabbitmq
   mysql:
-    image: joindevops/mysql:v1
+    image: msivakmrreddy/mysql:v1
     container_name: mysql
   shipping:
-    image: joindevops/shipping:v1
+    image: msivakmrreddy/shipping:v1
     container_name: shipping
     depends_on:
     - mysql
   payment:
-    image: joindevops/payment:v1
+    image: msivakmrreddy/payment:v1
     container_name: payment
     depends_on:
     - rabbitmq
   frontend:
-    image: joindevops/frontend:v1
+    image: msivakmrreddy/frontend:v1
     container_name: frontend
     ports:
     - "80:80"
     depends_on:
-    - catalouge
+    - catalogue
     - user
     - cart
     - shipping
