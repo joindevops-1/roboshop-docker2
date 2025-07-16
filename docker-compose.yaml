@@ -1,0 +1,53 @@
+networks:
+  default:
+    name: roboshop
+    driver: bridge
+services:
+  mongodb:
+    image: joindevops/mongodb:v1
+    container_name: mongodb
+  catalogue:
+    image: joindevops/catalouge:v1
+    container_name: catalogue
+    depends_on:
+    - mongodb
+  redis:
+    image: redis:7.0
+    container_name: redis
+  user:
+    image: joindevops/user:v1
+    container_name: user
+    depends_on:
+    - redis
+  cart:
+    image: joindevops/cart:v1
+    container_name: cart
+    depends_on:
+    - redis
+  rabbitmq:
+    image: rabbitmq:3.0
+    container_name: rabbitmq
+  mysql:
+    image: joindevops/mysql:v1
+    container_name: mysql
+  shipping:
+    image: joindevops/shipping:v1
+    container_name: shipping
+    depends_on:
+    - mysql
+  payment:
+    image: joindevops/payment:v1
+    container_name: payment
+    depends_on:
+    - rabbitmq
+  frontend:
+    image: joindevops/frontend:v1
+    container_name: frontend
+    ports:
+    - "80:80"
+    depends_on:
+    - catalouge
+    - user
+    - cart
+    - shipping
+    - payment
