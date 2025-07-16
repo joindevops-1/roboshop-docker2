@@ -7,7 +7,7 @@ services:
     image: msivakmrreddy/mongodb:v1
     container_name: mongodb
   catalogue:
-    image: msivakmrreddy/catalouge:v1
+    image: msivakmrreddy/catalogue:v1
     container_name: catalogue
     depends_on:
     - mongodb
