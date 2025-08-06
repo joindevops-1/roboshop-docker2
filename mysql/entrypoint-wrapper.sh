@@ -6,4 +6,5 @@ if [ -f /tmp/mysql/password.txt ]; then
 fi
 
 # Now call the original MySQL entrypoint
-exec /entrypoint.sh "$@"
+docker-entrypoint.sh mysqld
+
